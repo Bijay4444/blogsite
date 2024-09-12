@@ -15,6 +15,9 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Default Title
+APP_NAME = 'blogsite'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -37,7 +40,35 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize', 
+    
+    #Extensions 
+    'django_extensions',
+    'crispy_forms',
+    'rest_framework',
+    'social_django',
+    'taggit',
+    'tailwind',
+    'blog_theme',
+    'django_browser_reload',
+    
+    
+    #Custom applications
+    'home',
+    'blog',
 ]
+
+#for tailwind
+TAILWIND_APP_NAME = 'blog_theme'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+#For crispy forms
+CRISPY_TEMPLATE_PACK = 'tailwind'
+
+#For Taggit
+TAGGIT_CASE_INSENSITIVE = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -47,7 +78,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
+
+#for whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 ROOT_URLCONF = 'blogsite.urls'
 
@@ -62,6 +100,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                'home.context_processors.settings', #added for custom context processor
+                'social_django.context_processors.backends', #added for social auth
+                'social_django.context_processors.login_redirect', #added for social auth
             ],
         },
     },
@@ -118,8 +160,42 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'blog_theme/static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
+
+
+# Configuration to the social login
+try:
+    from . import github_settings
+    SOCIAL_AUTH_GITHUB_KEY = github_settings.SOCIAL_AUTH_GITHUB_KEY
+    SOCIAL_AUTH_GITHUB_SECRET = github_settings.SOCIAL_AUTH_GITHUB_SECRET
+except:
+    print('When you want to use social login, please see mysite/github_settings-dist.py')
+
+# https://python-social-auth.readthedocs.io/en/latest/configuration/django.html#authentication-backends
+# https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    # 'social_core.backends.twitter.TwitterOAuth',
+    # 'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+
+
+NPM_BIN_PATH = "/home/bijay/.nvm/versions/node/v20.17.0/bin/npm"
