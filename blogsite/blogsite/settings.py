@@ -51,10 +51,10 @@ INSTALLED_APPS = [
     'tailwind',
     'blog_theme',
     'django_browser_reload',
+    'home.apps.HomeConfig',
     
     
     #Custom applications
-    'home',
     'blog',
 ]
 

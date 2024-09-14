@@ -1,0 +1,39 @@
+{% extends "base_tailwind.html" %}
+
+{% block content %}
+
+<div class="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-8">
+    {% if form.errors %}
+        <p class="text-red-600">Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p class="text-red-600">Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+        {% else %}
+            <p class="text-gray-700">Please login to see this site.</p>
+        {% endif %}
+    {% endif %}
+
+    {% load crispy_forms_tags %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="flex items-center justify-between">
+            <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="Login Locally" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+    </form>
+
+    {% if settings.SOCIAL_AUTH_GITHUB_KEY %}
+    <hr class="my-6"/>
+    <div class="text-center">
+        <a class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded inline-flex items-center" role="button" href="{% url 'social:begin' 'github' %}?next={{ next }}">
+            <i class="fa fa-github mr-2" aria-hidden="true"></i>Login with GitHub
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

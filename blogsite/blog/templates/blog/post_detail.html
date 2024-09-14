@@ -1,0 +1,33 @@
+{% extends 'base_nav.html' %}
+
+{% block main_content %}
+<div class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold">{{ post.title }}</h1>
+    <p class="text-sm text-gray-600">Posted by {{ post.owner }} on {{ post.created_at }}</p>
+
+    {% if post.picture %}
+        <img src="{{ post.picture.url }}" alt="{{ post.title }}" class="my-4">
+    {% endif %}
+
+    <p class="mt-4">{{ post.content }}</p>
+
+    <hr class="my-6">
+
+    <h3 class="text-xl font-bold">Comments</h3>
+    {% for comment in comments %}
+        <div class="bg-gray-100 p-2 mt-2 rounded">
+            <p>{{ comment.comment }}</p>
+            <p class="text-sm text-gray-500">Posted by {{ comment.owner }} on {{ comment.created_at }}</p>
+            {% if comment.owner == user %}
+                <a href="{% url 'blogs:comment_delete' comment.id %}" class="text-red-500 hover:underline">Delete</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <form action="{% url 'blogs:comment_create' post.pk %}" method="post" class="mt-4">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Comment</button>
+    </form>
+</div>
+{% endblock %}

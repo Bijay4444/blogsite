@@ -1,23 +1,48 @@
 {% extends 'base_tailwind.html' %}
+{% load static %}
+{% load app_tags %} <!-- Assuming you have custom tags in app_tags.py -->
 
 {% block content %}
-    <nav class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between h-16">
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <!-- Mobile menu button -->
-                </div>
-                <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                    <div class="flex-shrink-0">
-                        <a href="{% url 'home' %}" class="text-xl font-semibold text-gray-900">My Blog</a>
+    <nav class="bg-gray-900 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <!-- Assuming you have APP_NAME defined in settings or using your app_tags -->
+                    <a href="{% url 'blogs:all' %}" class="text-2xl font-bold text-white hover:text-gray-400">
+                        {{ settings.APP_NAME }} <!-- or replace with {{ app_name }} if passed via context -->
+                    </a>
+                    <div class="ml-6 flex space-x-4">
+                        <a href="{% url 'blogs:all' %}" class="text-white hover:text-gray-400 px-3 py-2 rounded-md text-sm font-medium">
+                            Blog
+                        </a>
+                        <a href="#" class="text-white hover:text-gray-400 px-3 py-2 rounded-md text-sm font-medium">
+                            About
+                        </a>
                     </div>
-                    <div class="hidden sm:block sm:ml-6">
-                        <div class="flex space-x-4">
-                            <a href="{% url 'blog_list' %}" class="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
-                            <a href="{% url 'about' %}" class="text-gray-900 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium">About</a>
-                            <!-- Add more navigation links here -->
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'blogs:post_create' %}" class="text-white hover:text-gray-400 px-3 py-2 rounded-md text-sm font-medium">
+                        Create Post
+                    </a>
+                    <div class="relative">
+                        <button type="button" class="text-white focus:outline-none" id="user-menu-button" aria-expanded="false">
+                            <!-- Gravatar tag -->
+                            <img class="h-8 w-8 rounded-full" src="{{ user|gravatar:60 }}" alt="">
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                            <a href="{% url 'logout' %}?next={% url 'blogs:all' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                                Logout
+                            </a>
                         </div>
                     </div>
+                    {% else %}
+                    <a href="{% url 'login' %}?next={% url 'blogs:all' %}" class="text-white hover:text-gray-400 px-3 py-2 rounded-md text-sm font-medium">
+                        Login
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
