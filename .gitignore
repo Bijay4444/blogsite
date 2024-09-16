@@ -136,3 +136,8 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+#Ignoring Files
+blogsite/github_settings.py
+blogsite/google_settings.py
+blogsite/facebook_settings.py
