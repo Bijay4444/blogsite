@@ -34,6 +34,35 @@
         </a>
     </div>
     {% endif %}
+
+    {% if settings.SOCIAL_AUTH_FACEBOOK_KEY %}
+    <hr class="my-6"/>
+    <div class="text-center">
+        <a class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center" role="button" href="{% url 'social:begin' 'facebook' %}?next={{ next }}">
+            <i class="fab fa-facebook-f mr-2" aria-hidden="true"></i>Login with Facebook
+        </a>
+    </div>
+    {% endif %}
+
+    {% if settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY %}
+    <hr class="my-6"/>
+    <div class="text-center">
+        <a class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center" role="button" href="{% url 'social:begin' 'google-oauth2' %}?next={{ next }}">
+            <i class="fab fa-google mr-2" aria-hidden="true"></i>Login with Google
+        </a>
+    </div>
+    {% endif %}
+
+    {% if settings.SOCIAL_AUTH_TWITTER_KEY %}
+    <hr class="my-6"/>
+    <div class="text-center">
+        <a class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded inline-flex items-center" role="button" href="{% url 'social:begin' 'twitter' %}?next={{ next }}">
+            <i class="fab fa-twitter mr-2" aria-hidden="true"></i>Login with Twitter
+        </a>
+    </div>
+    {% endif %}
+
+    
 </div>
 
 {% endblock %}

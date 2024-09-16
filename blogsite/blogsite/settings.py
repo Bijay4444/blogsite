@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     #Extensions 
     'django_extensions',
     'crispy_forms',
+    'crispy_tailwind',
     'rest_framework',
     'social_django',
     'taggit',
@@ -67,7 +68,8 @@ INTERNAL_IPS = [
 ]
 
 #For crispy forms
-CRISPY_TEMPLATE_PACK = 'tailwind'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 #For Taggit
 TAGGIT_CASE_INSENSITIVE = True
@@ -83,6 +85,7 @@ MIDDLEWARE = [
     
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 #for whitenoise
@@ -183,9 +186,6 @@ try:
     SOCIAL_AUTH_GITHUB_KEY = config('SOCIAL_AUTH_GITHUB_KEY')
     SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
 except:
-<<<<<<< HEAD
-    print('When you want to use social login, please see mysite/github_settings-dist.py')
-=======
     print('When you want to use social login, please see mysite/github_settings.py')
     
 try:
@@ -205,14 +205,14 @@ try:
     SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')
 except:
     print('Facebook settings not found.')
->>>>>>> 7638dec (fixed:cred)
 
 # https://python-social-auth.readthedocs.io/en/latest/configuration/django.html#authentication-backends
 # https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
-    # 'social_core.backends.twitter.TwitterOAuth',
-    # 'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -226,3 +226,4 @@ NPM_BIN_PATH = "/home/bijay/.nvm/versions/node/v20.17.0/bin/npm"
 #MEDIA CONFIGURATION
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
