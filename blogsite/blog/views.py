@@ -59,3 +59,4 @@ class CommentDeleteView(OwnerDeleteView):
         post = self.object.post
         messages.success(self.request, 'Comment deleted successfully!')
         return reverse('blogs:post_detail', args=[post.id])
+    
