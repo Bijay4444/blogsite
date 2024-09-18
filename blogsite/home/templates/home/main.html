@@ -1,7 +1,17 @@
 {% extends "base_tailwind.html" %}
 {% block content %}
-    <h1>Welcome to {{ settings.APP_NAME }}</h1>
-    <p>
-    Hello world.
-    </p>
+    <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+        <div class="max-w-2xl mx-auto text-center px-4">
+            <h1 class="text-4xl font-bold mb-4 text-gray-800">Bijay Khadka</h1>
+            <p class="text-xl text-gray-600 mb-8">Software developer specializing in database and backend technology, optimization, and cloud solutions.</p>
+            <div class="space-x-4">
+                <a href="{% url 'blogs:all' %}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                    Visit My Blog
+                </a>
+                <a href="{% url 'blogs:all' %}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+    </body>
 {% endblock content %}
