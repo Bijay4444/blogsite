@@ -6,7 +6,14 @@ module.exports = {
         // Add any additional paths if necessary
     ],
     theme: {
-        extend: {},
+        extend: {
+            screens:{
+                "sm": "480px"
+            }
+        },
+        fontfamily: {
+            nunito: ['Nunito', 'sans-serif'],
+        },
     },
     plugins: [
         require('@tailwindcss/forms'),
