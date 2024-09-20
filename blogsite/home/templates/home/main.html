@@ -1,4 +1,5 @@
 {% extends "base_tailwind.html" %}
+{% load static %}
 {% block content %}
 <body class="font-nunito">
     <!-- into section -->
@@ -9,7 +10,7 @@
       <nav class="w-full fixed top-0 bg-white z-10 dark:bg-slate-900">
         <div class="container mx-auto py-5 flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <img class="w-8" src="./img/logo.png" alt="" />
+            <img class="w-8" src="{% static 'home/images/logo.png' %}" alt="" />
             <span class="text-2xl font-bold text-indigo-900 dark:text-white"
               >Bijay.</span
             >
@@ -35,14 +36,14 @@
           </ul>
           <img
             id="moon"
-            src="./img/moon.png"
+            src="{% static 'home/images/moon.png' %}"
             class="hidden md:block w-5 cursor-pointer"
             alt=""
           />
           <div id="hamburger" class="space-y-1 md:hidden cursor-pointer z-20">
-            <div class="w-6 h-0.5 bg-black"></div>
-            <div class="w-6 h-0.5 bg-black"></div>
-            <div class="w-6 h-0.5 bg-black"></div>
+            <div class="w-6 h-0.5 bg-white"></div>
+            <div class="w-6 h-0.5 bg-white"></div>
+            <div class="w-6 h-0.5 bg-white"></div>
           </div>
           <ul
             id="menu"
@@ -70,7 +71,7 @@
       <!-- image -->
       <img
         class="absolute bottom-0 right-0 lg:left-0 mx-auto h-5/6 object-cover"
-        src="./img/man.png"
+        src="{% static 'home/images/man.png' %}"
         alt=""
       />
       <!-- circle -->
@@ -81,7 +82,7 @@
       <div
         class="absolute top-1/3 left-5 text-xl sm:left-10 sm:text-4xl md:left-1/4 md:text-6xl lg:left-5 xl:left-48 xl:text-7xl font-bold"
       >
-        <span class="text-gray-600">Backend <br>Developer</span>
+        <span class="text-gray-600">Backend</span>
         <p id="text" class="text-red-500"></p>
       </div>
       <!-- texts -->
@@ -105,141 +106,94 @@
     </div>
     <!-- about -->
     <div id="about" class="px-10 dark:bg-slate-900">
-      <div
-        class="container mx-auto py-40 flex flex-col-reverse lg:flex-row items-center gap-20"
-      >
+      <div class="container mx-auto py-40 flex flex-col-reverse lg:flex-row items-center gap-20">
         <!-- left -->
         <div class="relative">
-          <img
-            class="h-1/4 absolute top-0 left-0 -z-10"
-            src="./img/dots.png"
-            alt=""
-          />
-          <div class="h-full rounded-full overflow-hidden">
-            <img src="./img/portrait.png" alt="" />
+          <img class="h-1/4 absolute top-0 left-0 -z-10" src="{% static "home/images/dots.png" %}" alt="" />
+          <div class="h-full rounded-full overflow-hidden object-scale-down h-55 w-96">
+            <img src="{% static "home/images/me.jpg" %}" alt="" />
           </div>
         </div>
         <!-- right -->
         <div class="my-auto flex flex-col gap-3">
           <h1 class="text-indigo-600 font-bold">ABOUT ME</h1>
-          <h1 class="text-3xl font-medium dark:text-white">Better Design</h1>
           <h1 class="text-3xl font-medium dark:text-white">
-            Better Experience
+            What Do I Do?
           </h1>
           <p class="text-gray-400">
-            I design and build digital products. I'm also a multi-disciplinary
-            maker with over 10 years of experiences in wide range of design
-            disciplines.
+            I am a Django developer passionate about building dynamic, scalable backend systems. 
+            With a strong foundation in Python, I focus on creating robust web applications while 
+            continuously learning and improving my skills. Based in Nepal, I am looking to collaborate or workon
+            on various projects . My goal is to deliver efficient and effective digital solutions.
           </p>
-          <h2 class="text-gray-400 font-medium">HTML</h2>
-          <div class="w-full bg-gray-200 h-1.5 rounded-md">
-            <div class="w-full bg-indigo-600 h-1.5 rounded-md"></div>
-          </div>
-          <h2 class="text-gray-400 font-medium">Javascript</h2>
+          <h2 class="text-gray-400 font-medium">Python</h2>
           <div class="w-full bg-gray-200 h-1.5 rounded-md">
             <div class="w-4/6 bg-indigo-600 h-1.5 rounded-md"></div>
           </div>
-          <h2 class="text-gray-400 font-medium">React</h2>
+          <h2 class="text-gray-400 font-medium">Django</h2>
           <div class="w-full bg-gray-200 h-1.5 rounded-md">
-            <div class="w-5/6 bg-indigo-600 h-1.5 rounded-md"></div>
+            <div class="w-3/6 bg-indigo-600 h-1.5 rounded-md"></div>
+          </div>
+          <h2 class="text-gray-400 font-medium">Frontend Development</h2>
+          <div class="w-full bg-gray-200 h-1.5 rounded-md">
+            <div class="w-2/6 bg-indigo-600 h-1.5 rounded-md"></div>
+          </div>
+
+          <h2 class="text-gray-400 font-medium">Database</h2>
+          <div class="w-full bg-gray-200 h-1.5 rounded-md">
+            <div class="w-3/6 bg-indigo-600 h-1.5 rounded-md">
           </div>
         </div>
       </div>
     </div>
+
     <!-- services -->
     <div id="services" class="dark:bg-slate-900">
       <div class="container mx-auto">
         <!-- top -->
         <div class="flex flex-col gap-3 items-center">
           <h1 class="text-indigo-600 font-bold">SERVICES</h1>
-          <h1 class="text-3xl dark:text-white">What do I offer?</h1>
+          <h1 class="text-3xl dark:text-white">What Do I Offer?</h1>
           <p class="w-1/2 text-center text-gray-400">
-            My approach to website design is to create a website that
-            strengthens your company’s brand while ensuring ease of use and
-            simplicity for your audience.
+            As a Django developer, I specialize in building dynamic and scalable web applications, focusing on efficient backend systems and secure user experiences.
           </p>
         </div>
         <!-- bottom -->
         <div class="p-5 sm:p-0 flex flex-wrap justify-between">
-          <!-- card -->
+          <!-- card 1 -->
           <div
             class="w-full md:w-4/12 shadow-xl rounded-lg p-5 my-3 md:my-10 flex flex-col gap-3"
           >
-            <img class="w-10" src="./img/icon.png" alt="" />
-            <h1 class="font-medium text-lg dark:text-white">UX / UI Design</h1>
+            <img class="w-10" src="./img/backend_icon.png" alt="" />
+            <h1 class="font-medium text-lg dark:text-white">Backend Development</h1>
             <p class="text-gray-400">
-              I specialize in creating interactive websites for individuals and
-              small businesses.
+              I build robust backend systems using Python and Django, ensuring security, scalability, and seamless integration with APIs and databases.
             </p>
             <a class="text-indigo-600 font-semibold text-sm" href=""
               >Read More</a
             >
           </div>
-          <!-- card -->
+          <!-- card 2 -->
           <div
             class="w-full md:w-4/12 shadow-xl rounded-lg p-5 my-3 md:my-10 flex flex-col gap-3"
           >
-            <img class="w-10" src="./img/icon.png" alt="" />
-            <h1 class="font-medium text-lg dark:text-white">UX / UI Design</h1>
+            <img class="w-10" src="./img/fullstack_icon.png" alt="" />
+            <h1 class="font-medium text-lg dark:text-white">Full-Stack Development</h1>
             <p class="text-gray-400">
-              I specialize in creating interactive websites for individuals and
-              small businesses.
+              Combining frontend and backend expertise, I create full-stack web applications using Django for the backend and Tailwind CSS for modern, responsive UIs.
             </p>
             <a class="text-indigo-600 font-semibold text-sm" href=""
               >Read More</a
             >
           </div>
-          <!-- card -->
+          <!-- card 3 -->
           <div
             class="w-full md:w-4/12 shadow-xl rounded-lg p-5 my-3 md:my-10 flex flex-col gap-3"
           >
-            <img class="w-10" src="./img/icon.png" alt="" />
-            <h1 class="font-medium text-lg dark:text-white">UX / UI Design</h1>
+            <img class="w-10" src="./img/api_icon.png" alt="" />
+            <h1 class="font-medium text-lg dark:text-white">API Integration</h1>
             <p class="text-gray-400">
-              I specialize in creating interactive websites for individuals and
-              small businesses.
-            </p>
-            <a class="text-indigo-600 font-semibold text-sm" href=""
-              >Read More</a
-            >
-          </div>
-          <!-- card -->
-          <div
-            class="w-full md:w-4/12 shadow-xl rounded-lg p-5 my-3 md:my-10 flex flex-col gap-3"
-          >
-            <img class="w-10" src="./img/icon.png" alt="" />
-            <h1 class="font-medium text-lg dark:text-white">UX / UI Design</h1>
-            <p class="text-gray-400">
-              I specialize in creating interactive websites for individuals and
-              small businesses.
-            </p>
-            <a class="text-indigo-600 font-semibold text-sm" href=""
-              >Read More</a
-            >
-          </div>
-          <!-- card -->
-          <div
-            class="w-full md:w-4/12 shadow-xl rounded-lg p-5 my-3 md:my-10 flex flex-col gap-3"
-          >
-            <img class="w-10" src="./img/icon.png" alt="" />
-            <h1 class="font-medium text-lg dark:text-white">UX / UI Design</h1>
-            <p class="text-gray-400">
-              I specialize in creating interactive websites for individuals and
-              small businesses.
-            </p>
-            <a class="text-indigo-600 font-semibold text-sm" href=""
-              >Read More</a
-            >
-          </div>
-          <!-- card -->
-          <div
-            class="w-full md:w-4/12 shadow-xl rounded-lg p-5 my-3 md:my-10 flex flex-col gap-3"
-          >
-            <img class="w-10" src="./img/icon.png" alt="" />
-            <h1 class="font-medium text-lg dark:text-white">UX / UI Design</h1>
-            <p class="text-gray-400">
-              I specialize in creating interactive websites for individuals and
-              small businesses.
+              I integrate third-party services and APIs into web applications, such as social authentication and payment gateways, ensuring smooth and secure interactions.
             </p>
             <a class="text-indigo-600 font-semibold text-sm" href=""
               >Read More</a
@@ -248,6 +202,7 @@
         </div>
       </div>
     </div>
+
     <!-- works -->
     <div id="works" class="py-40 dark:bg-slate-900">
       <div class="container mx-auto">
@@ -256,64 +211,48 @@
           <h1 class="text-indigo-600 font-bold">PORTFOLIO</h1>
           <h1 class="text-3xl dark:text-white">Works & Projects</h1>
           <p class="w-1/2 text-center text-gray-400">
-            I help designers, small agencies and businesses bring their ideas to
-            life. Powered by Figma, VS Code and coffee, I turn your requirements
-            into a well-designed websites
+            I specialize in building scalable web applications using Python and Django. Here are some of the projects I've worked on, which showcase my expertise in backend development, API integration, and full-stack web applications.
           </p>
         </div>
         <!-- bottom -->
         <div class="p-5 sm:p-0 flex flex-wrap justify-between">
-          <!-- card -->
+          <!-- card 1 -->
           <div
             class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
           >
-            <img src="./img/item.png" />
+            <img src="./img/project1.png" alt="Blog App" />
+            <h3 class="text-center text-lg font-semibold dark:text-white mt-2">Blog Application</h3>
+            <p class="text-gray-400 text-sm text-center">A full-featured blog platform built with Django, featuring user authentication, social login, and dynamic content management.</p>
           </div>
-          <!-- card -->
+          <!-- card 2 -->
           <div
             class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
           >
-            <img src="./img/item.png" />
+            <img src="./img/project2.png" alt="E-commerce Platform" />
+            <h3 class="text-center text-lg font-semibold dark:text-white mt-2">E-commerce Platform</h3>
+            <p class="text-gray-400 text-sm text-center">A Django-powered e-commerce platform with shopping cart, payment gateway integration, and admin management.</p>
           </div>
-          <!-- card -->
+          <!-- card 3 -->
           <div
             class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
           >
-            <img src="./img/item.png" />
+            <img src="./img/project3.png" alt="Portfolio Website" />
+            <h3 class="text-center text-lg font-semibold dark:text-white mt-2">Portfolio Website</h3>
+            <p class="text-gray-400 text-sm text-center">A personal portfolio showcasing my projects and expertise, built with Django and Tailwind CSS for a clean, responsive design.</p>
           </div>
-          <!-- card -->
+          <!-- card 4 -->
           <div
             class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
           >
-            <img src="./img/item.png" />
+            <img src="./img/project4.png" alt="Social Media API" />
+            <h3 class="text-center text-lg font-semibold dark:text-white mt-2">Social Media API</h3>
+            <p class="text-gray-400 text-sm text-center">An API built with Django Rest Framework (DRF), enabling users to interact with a social media platform programmatically.</p>
           </div>
-          <!-- card -->
-          <div
-            class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
-          >
-            <img src="./img/item.png" />
-          </div>
-          <!-- card -->
-          <div
-            class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
-          >
-            <img src="./img/item.png" />
-          </div>
-          <!-- card -->
-          <div
-            class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
-          >
-            <img src="./img/item.png" />
-          </div>
-          <!-- card -->
-          <div
-            class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
-          >
-            <img src="./img/item.png" />
-          </div>
+          <!-- Add more cards for other projects as needed -->
         </div>
       </div>
     </div>
+
 
     <!-- contact -->
     <div id="contact" class="dark:bg-slate-900">
@@ -357,21 +296,21 @@
     <div class="w-full bg-gray-800">
       <div class="container mx-auto py-5 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <img class="w-8" src="./img/logo.png" alt="" />
+          <img class="w-8" src="{% static 'home/images/logo.png' %}" alt="" />
           <span class="text-2xl font-bold text-white">Bijay Khadka.</span>
         </div>
         <span class="hidden md:block font-medium text-white"
-          >© 2024 </span
+          >© All rights reserved. </span
            >
         <div class="flex gap-2">
-          <img class="w-4 cursor-pointer" src="./img/facebook.png" alt="" />
-          <img class="w-4 cursor-pointer" src="./img/instagram.png" alt="" />
-          <img class="w-4 cursor-pointer" src="./img/twitter.png" alt="" />
-          <img class="w-4 cursor-pointer" src="./img/linkedin.png" alt="" />
+          <img class="w-4 cursor-pointer" src="{% static 'home/images/facebook.png' %}" alt="" />
+          <img class="w-4 cursor-pointer" src="{% static 'home/images/instagram.png' %}" alt="" />
+          <img class="w-4 cursor-pointer" src="{% static 'home/images/Linkedin.png' %}" alt="" />
+          <img class="w-4 cursor-pointer" src="{% static 'home/images/twitter.png' %}" alt="" />
         </div>
       </div>
     </div>
-    <script src="./app.js"></script>
-    <script src="./autotyping.js"></script>
+    <script src="{% static 'home/js/autotyping.js' %}"></script>
+    <script src="{% static 'home/js/app.js' %}"></script>
   </body>
 {% endblock content %}
