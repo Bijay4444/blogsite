@@ -41,9 +41,9 @@
             alt=""
           />
           <div id="hamburger" class="space-y-1 md:hidden cursor-pointer z-20">
-            <div class="w-6 h-0.5 bg-white"></div>
-            <div class="w-6 h-0.5 bg-white"></div>
-            <div class="w-6 h-0.5 bg-white"></div>
+            <div class="w-6 h-0.5 bg-black"></div>
+            <div class="w-6 h-0.5 bg-black"></div>
+            <div class="w-6 h-0.5 bg-black"></div>
           </div>
           <ul
             id="menu"
@@ -69,11 +69,11 @@
       </nav>
       <!-- intro content -->
       <!-- image -->
-      <img
+      {% comment %} <img
         class="absolute bottom-0 right-0 lg:left-0 mx-auto h-5/6 object-cover"
         src="{% static 'home/images/man.png' %}"
         alt=""
-      />
+      /> {% endcomment %}
       <!-- circle -->
       <div
         class="hidden lg:block absolute -bottom-1/4 right-0 left-0 mx-auto w-big h-big bg-indigo-900 rounded-full -z-10"
@@ -164,7 +164,7 @@
           <div
             class="w-full md:w-4/12 shadow-xl rounded-lg p-5 my-3 md:my-10 flex flex-col gap-3"
           >
-            <img class="w-10" src="./img/backend_icon.png" alt="" />
+            <img class="w-30" src="{% static "home/images/backend_icon.jpg" %}" alt="" />
             <h1 class="font-medium text-lg dark:text-white">Backend Development</h1>
             <p class="text-gray-400">
               I build robust backend systems using Python and Django, ensuring security, scalability, and seamless integration with APIs and databases.
@@ -177,8 +177,8 @@
           <div
             class="w-full md:w-4/12 shadow-xl rounded-lg p-5 my-3 md:my-10 flex flex-col gap-3"
           >
-            <img class="w-10" src="./img/fullstack_icon.png" alt="" />
-            <h1 class="font-medium text-lg dark:text-white">Full-Stack Development</h1>
+            <img class="w-30" src="{% static "home/images/webapp_icon.jpg" %}" alt="" />
+            <h1 class="font-medium text-lg dark:text-white">Web-App Development</h1>
             <p class="text-gray-400">
               Combining frontend and backend expertise, I create full-stack web applications using Django for the backend and Tailwind CSS for modern, responsive UIs.
             </p>
@@ -190,7 +190,7 @@
           <div
             class="w-full md:w-4/12 shadow-xl rounded-lg p-5 my-3 md:my-10 flex flex-col gap-3"
           >
-            <img class="w-10" src="./img/api_icon.png" alt="" />
+            <img class="w-30" src="{% static "home/images/API_icon.jpg" %}" alt="" />
             <h1 class="font-medium text-lg dark:text-white">API Integration</h1>
             <p class="text-gray-400">
               I integrate third-party services and APIs into web applications, such as social authentication and payment gateways, ensuring smooth and secure interactions.
@@ -220,7 +220,7 @@
           <div
             class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
           >
-            <img src="./img/project1.png" alt="Blog App" />
+            <img src="./img/project1.png" alt="" />
             <h3 class="text-center text-lg font-semibold dark:text-white mt-2">Blog Application</h3>
             <p class="text-gray-400 text-sm text-center">A full-featured blog platform built with Django, featuring user authentication, social login, and dynamic content management.</p>
           </div>
@@ -228,7 +228,7 @@
           <div
             class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
           >
-            <img src="./img/project2.png" alt="E-commerce Platform" />
+            <img src="./img/project2.png" alt="" />
             <h3 class="text-center text-lg font-semibold dark:text-white mt-2">E-commerce Platform</h3>
             <p class="text-gray-400 text-sm text-center">A Django-powered e-commerce platform with shopping cart, payment gateway integration, and admin management.</p>
           </div>
@@ -236,7 +236,7 @@
           <div
             class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
           >
-            <img src="./img/project3.png" alt="Portfolio Website" />
+            <img src="./img/project3.png" alt="" />
             <h3 class="text-center text-lg font-semibold dark:text-white mt-2">Portfolio Website</h3>
             <p class="text-gray-400 text-sm text-center">A personal portfolio showcasing my projects and expertise, built with Django and Tailwind CSS for a clean, responsive design.</p>
           </div>
@@ -244,7 +244,7 @@
           <div
             class="w-full md:w-5/12 lg:w-1/5 shadow-xl rounded-lg my-3 md:my-10 m-1 transition-all hover:scale-110"
           >
-            <img src="./img/project4.png" alt="Social Media API" />
+            <img src="./img/project4.png" alt="" />
             <h3 class="text-center text-lg font-semibold dark:text-white mt-2">Social Media API</h3>
             <p class="text-gray-400 text-sm text-center">An API built with Django Rest Framework (DRF), enabling users to interact with a social media platform programmatically.</p>
           </div>
@@ -293,23 +293,25 @@
       </div>
     </div>
     <!-- footer -->
-    <div class="w-full bg-gray-800">
+    <class="w-full bg-gray-800">
       <div class="container mx-auto py-5 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <img class="w-8" src="{% static 'home/images/logo.png' %}" alt="" />
-          <span class="text-2xl font-bold text-white">Bijay Khadka.</span>
+          <span class="text-2xl font-bold text-indigo-900 dark:text-white"
+            >Bijay.</span
+          >
         </div>
-        <span class="hidden md:block font-medium text-white"
-          >© All rights reserved. </span
-           >
+        <span class="hidden md:block font-medium text-black dark:text-white"> © All Rights Reserved.</span>
+        
+        
         <div class="flex gap-2">
-          <img class="w-4 cursor-pointer" src="{% static 'home/images/facebook.png' %}" alt="" />
-          <img class="w-4 cursor-pointer" src="{% static 'home/images/instagram.png' %}" alt="" />
-          <img class="w-4 cursor-pointer" src="{% static 'home/images/Linkedin.png' %}" alt="" />
-          <img class="w-4 cursor-pointer" src="{% static 'home/images/twitter.png' %}" alt="" />
+          <img class="w-4 cursor-pointer" src="{% static "home/images/facebook.png" %}" alt=""/>
+          <img class="w-4 cursor-pointer" src="{% static "home/images/instagram.png" %}" alt=""/>
+          <img class="w-4 cursor-pointer" src="{% static "home/images/linkedin.png" %}" alt=""/>
+          <img class="w-4 cursor-pointer" src="{% static "home/images/twitter.png" %}" alt=""/>
         </div>
       </div>
-    </div>
+
     <script src="{% static 'home/js/autotyping.js' %}"></script>
     <script src="{% static 'home/js/app.js' %}"></script>
   </body>
