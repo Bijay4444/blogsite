@@ -5,11 +5,29 @@
     <h1 class="text-3xl font-bold mb-4">Posts</h1>
     {% for post in post_list %}
         <div class="bg-white p-4 mb-4 shadow-md rounded-lg">
-            <h2 class="text-2xl font-semibold"><a href="{% url 'blogs:post_detail' post.id %}">{{ post.title }}</a></h2>
-            <p class="text-sm text-gray-600">Posted by {{ post.owner }} on {{ post.created_at }}</p>
-            <p class="mt-2">{{ post.content|truncatewords:30 }}</p>
-            <a href="{% url 'blogs:post_detail' post.id %}" class="text-blue-500 hover:underline">Read more</a>
+            <h2 class="text-2xl font-semibold">
+                {% if post.slug %}
+                    <a href="{{ post.get_absolute_url }}">
+                        {{ post.title }}
+                    </a>
+                {% else %}
+                    {{ post.title }}
+                {% endif %}
+            </h2>
+            <p class="text-sm text-gray-600">
+                Published {{post.publish}} by {{post.owner}}
+            </p>
+            
+            <p class="mt-2">
+                {{ post.content|truncatewords:30|linebreaks }}
+            </p>
+            {% if post.slug %}
+                <a href="{{ post.get_absolute_url }}" class="text-blue-500 hover:underline">
+                    Read more
+            </a>
+        {% endif %}
         </div>
     {% endfor %}
+    {% include "pagination.html" with page_obj=posts %}
 </div>
 {% endblock %}

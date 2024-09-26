@@ -2,14 +2,18 @@
 
 {% block main_content %}
 <div class="container mx-auto px-4">
-    <h1 class="text-3xl font-bold">{{ post.title }}</h1>
-    <p class="text-sm text-gray-600">Posted by {{ post.owner }} on {{ post.created_at }}</p>
+    <h1 class="text-3xl font-bold">
+        {{ post.title }}
+    </h1>
+    <p class="text-sm text-gray-600">
+        Posted by {{ post.owner }} on {{ post.created_at }}
+    </p>
 
     {% if post.picture %}
         <img src="{{ post.picture.url }}" alt="{{ post.title }}" class="my-4">
     {% endif %}
 
-    <p class="mt-4">{{ post.content }}</p>
+    <p class="mt-4">{{ post.content }}|linebreaks</p>
 
     <hr class="my-6">
 

@@ -4,6 +4,7 @@ from django.core.validators import MinLengthValidator
 from django.conf import settings
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
+from django.urls import reverse
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -20,7 +21,9 @@ class Post(models.Model):
         validators=[MinLengthValidator(2, "Title must be greater than 2 characters")]
     )
     content = models.TextField()
-    slug = models.SlugField(max_length=250)
+    slug = models.SlugField(max_length=250, 
+                            unique_for_date='publish',
+                            )
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     tags = TaggableManager()
     picture = models.ImageField(upload_to='uploads/post_pictures', blank=True, null=True)
@@ -43,6 +46,18 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("blogs:post_detail",
+                    args=[self.publish.year,
+                            self.publish.month,
+                            self.publish.day,
+                            self.slug])
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
     
 class Comment(models.Model):
     comment = models.TextField(

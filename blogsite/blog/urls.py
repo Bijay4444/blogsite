@@ -7,7 +7,7 @@ app_name = 'blogs'
 urlpatterns = [
     # Example URL pattern
     path('', PostListView.as_view(), name='all'),
-    path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
+    path('post/<int:year>/<int:month>/<int:day>/<slug:slug>/', PostDetailView.as_view(), name='post_detail'),
     path('post/create/', PostCreateView.as_view(), name='post_create'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post_update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post_delete'),
