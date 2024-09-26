@@ -1,21 +1,45 @@
 from django.db import models
+from django.utils import timezone
 from django.core.validators import MinLengthValidator
 from django.conf import settings
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return (super().get_queryset().filter(status=Post.Status.PUBLISHED))
+
 # Create your models here.
 class Post(models.Model):
+    class Status(models.TextChoices):
+        DRAFT = 'DF', 'Draft'
+        PUBLISHED = 'PB', 'Published'
+    
     title = models.CharField(
         max_length=200,
         validators=[MinLengthValidator(2, "Title must be greater than 2 characters")]
     )
     content = models.TextField()
+    slug = models.SlugField(max_length=250)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     tags = TaggableManager()
     picture = models.ImageField(upload_to='uploads/post_pictures', blank=True, null=True)
+    publish = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    status = models.CharField(
+        max_length=2,
+        choices=Status,
+        default=Status.DRAFT
+    )
+    objects = models.Manager()#the default manager
+    published = PublishedManager()#the custom manager
+    
+    class Meta:
+        ordering = ['-publish']
+        indexes = [
+            models.Index(fields=['-publish']),
+        ]
     
     def __str__(self):
         return self.title
