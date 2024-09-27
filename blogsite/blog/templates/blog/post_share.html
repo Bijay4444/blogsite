@@ -1,0 +1,20 @@
+{% extends 'base_nav.html' %}
+{% block title %} Share a post {% endblock %}
+
+{% block main_content %}
+    {% if sent %}
+        <div class="container mx-auto px-4">
+            <h1 class="text-2xl font-bold">Post shared!</h1>
+            <p>Your post has been shared with your followers.</p>
+        </div>
+    {% else %}
+        <div class="container mx-auto px-4">
+            <h1 class="text-2xl font-bold">Share a post</h1>
+            <form method="post">
+                {{ form.as_p|crispy }}
+                {% csrf_token %}
+                <input type="submit" value="Send e-mail">
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
