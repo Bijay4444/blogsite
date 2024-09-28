@@ -10,6 +10,7 @@ from django.db.models import Q
 from .forms import CommentForm, EmailPostForm
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
+from django.utils import timezone
 
 
 class PostListView(OwnerListView):
@@ -71,6 +72,13 @@ class PostDeleteView(OwnerDeleteView):
     success_url = reverse_lazy('blogs:all')
     
 class PostShareView(View):
+    template_name = 'blog/post_share.html'
+    
+    def get(self, request, post_id):
+        post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
+        form = EmailPostForm()
+        return render(request, self.template_name, {'post': post, 'form': form})
+    
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
         sent = False
@@ -93,7 +101,7 @@ class PostShareView(View):
         else:
             form = EmailPostForm()
             
-        return render(request, 'blog/post_share.html', {'post': post, 
+        return render(request, self.template_name, {'post': post, 
                                                         'form': form, 
                                                         'sent': sent}
                       )
@@ -105,8 +113,9 @@ class CommentCreateView(LoginRequiredMixin, View):
         comment = Comment(
             comment=request.POST['comment'], owner=request.user, post=post)
         comment.save()
-        messages.success(request, 'Comment added successfully!')
-        return redirect(reverse('blogs:post_detail', args=[pk]))
+        return redirect(reverse('blogs:post_detail', args=[
+            post.publish.year, post.publish.month, post.publish.day, post.slug
+        ]))
 
 
 class CommentDeleteView(OwnerDeleteView):
@@ -115,5 +124,7 @@ class CommentDeleteView(OwnerDeleteView):
 
     def get_success_url(self):
         post = self.object.post
-        messages.success(self.request, 'Comment deleted successfully!')
-        return reverse('blogs:post_detail', args=[post.id])
+        return reverse('blogs:post_detail', args=[
+            post.publish.year, post.publish.month, post.publish.day, post.slug
+        ])
+

@@ -14,8 +14,8 @@
     {% endif %}
 
     <p class="mt-4">{{ post.content }}|linebreaks</p>
-    <p>
-        <a href="{% url "blogs:post_share" post.id %}"> Share this post </a>
+    <p class="px-5 bg-blue-100">
+        <a href="{% url 'blogs:post_share' post.id %}"> Share this post </a>
     </p>
 
     <hr class="my-6">

@@ -13,5 +13,11 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ['status', 'publish']
     show_facets = admin.ShowFacets.ALWAYS
 
-admin.site.register(Comment)
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['comment', 'post', 'created_at', 'updated_at']
+    list_filter = ['created_at', 'updated_at']
+    search_fields = ['comment']
+    ordering = ['created_at']
+
 admin.site.register(Interactions)

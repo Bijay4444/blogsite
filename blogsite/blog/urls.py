@@ -14,7 +14,7 @@ urlpatterns = [
     path('post/<int:pk>/share/', PostShareView.as_view(), name='post_share'),
     
     path('post/<int:pk>/comment/', CommentCreateView.as_view(), name='comment_create'),
-    path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='post_comment_delete'),
+    path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment_delete'),
     
     
 ]

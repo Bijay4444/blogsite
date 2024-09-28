@@ -69,9 +69,13 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        if len(self.comment) < 15:
-            return self.comment
-        return self.comment[:11] + ' ...'
+        return f'{self.owner.username} commented on {self.post.title}'
+    
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['-created_at']),
+        ]
     
 class Interactions(models.Model):
     INTERACTION_CHOICES = [

@@ -7,8 +7,8 @@
 
     <form method="post">
         {% csrf_token %}
-        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Yes, delete</button>
-        <a href="{% url 'blogs:post_detail' comment.post.id %}" class="text-blue-500 hover:underline">Cancel</a>
+        <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded">Yes, delete</button>
+        <a href="{% url 'blogs:post_detail' comment.post.publish.year comment.post.publish.month comment.post.publish.day comment.post.slug %}" class="text-blue-500 hover:underline">Cancel</a>
     </form>
 </div>
 {% endblock %}
