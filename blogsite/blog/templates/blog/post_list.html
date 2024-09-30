@@ -3,6 +3,10 @@
 {% block main_content %}
 <div class="container mx-auto px-4">
     <h1 class="text-3xl font-bold mb-4">Posts</h1>
+    {% if tag %}
+        <h2 class="text-xl font-semibold mb-4">Posts tagged with "{{ tag.name }}"</h2>
+    {% endif %}
+
     {% for post in post_list %}
         <div class="bg-white p-4 mb-4 shadow-md rounded-lg">
             <h2 class="text-2xl font-semibold">
@@ -14,6 +18,10 @@
                     {{ post.title }}
                 {% endif %}
             </h2>
+            <p> 
+                Tags: {{post.tags.all|join:", "}}
+            </p>
+
             <p class="text-sm text-gray-600">
                 Published {{post.publish}} by {{post.owner}}
             </p>

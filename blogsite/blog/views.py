@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect, get_object_or_404
 from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 from .models import Post, Comment, Interactions
@@ -11,15 +10,22 @@ from .forms import CommentForm, EmailPostForm
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.utils import timezone
+from taggit.models import Tag
+from django.db.models import Count
 
 
 class PostListView(OwnerListView):
     model = Post
     template_name = "blog/post_list.html"
 
-    def get(self, request):
+    def get(self, request, tag_slug=None):
         post_list = Post.objects.all()
         comment_list = Comment.objects.all()
+        tag = None
+        if tag_slug:
+            tag = get_object_or_404(Tag, slug=tag_slug)
+            post_list = post_list.filter(tags__in=[tag])
+            
         paginator = Paginator(post_list, 3)
         page_number = request.GET.get('page', 1)
         try:
@@ -30,7 +36,7 @@ class PostListView(OwnerListView):
             posts = paginator.page(paginator.num_pages)
             
         ctx = {'post_list': post_list,
-               'comment_list': comment_list, 'posts': posts}
+               'comment_list': comment_list, 'posts': posts, 'tag': tag}
         return render(request, self.template_name, ctx)
 
 
@@ -50,8 +56,15 @@ class PostDetailView(OwnerDetailView):
 
         comments = Comment.objects.filter(post=post).order_by('-created_at')
         comment_form = CommentForm()
+        #list of similar posts
+        post_tags_ids = post.tags.values_list('id', flat=True)
+        similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+        similar_posts = similar_posts.annotate(same_tags=Count('tags')
+                                               ).order_by('-same_tags', '-publish')[:4]
+        
+        
         ctx = {'post': post, 'comments': comments,
-               'comment_form': comment_form}
+               'comment_form': comment_form, 'similar_posts': similar_posts}
         return render(request, self.template_name, ctx)
 
 
