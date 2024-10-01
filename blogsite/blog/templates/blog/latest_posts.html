@@ -1,0 +1,14 @@
+{% extends 'base_nav.html' %}
+{% load blog_tags %}
+{% block main_content %}
+
+<ul>
+    {% for post in post_list %}
+        <li>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            <p>{{ post.content|truncatewords:30 }}</p>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
