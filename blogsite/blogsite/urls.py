@@ -15,13 +15,18 @@ Including another URLconf
 """
 import os
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include, re_path
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.views.static import serve
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
+from blog.sitemaps import PostSitemap
 
+sitemaps = {
+     'posts': PostSitemap,
+}
 
 urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),  # for development only
@@ -32,6 +37,13 @@ urlpatterns = [
     re_path(r'^oauth/', include('social_django.urls', namespace='social')),  #social auth urls
 
     path('', TemplateView.as_view(template_name='home/main.html')),  # home page
+    
+    path(
+        'sitemap.xml',
+        sitemap,
+        {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap'
+    )
 ]
 
 

@@ -20,7 +20,7 @@
                 {% endif %}
             </h2>
             <p> 
-                Tags: %
+                Tags: 
                 {% for tag in post.tags.all %}
                     <a href="{% url "blogs:post_list_by_tag" tag.slug %}">
                         {{tag.name}}
@@ -33,7 +33,7 @@
             </p>
             
             <p class="mt-2">
-                {{ post.content|truncatewords:30|linebreaks }}
+                {{ post.content|markdown|truncatewords:30|linebreaks }}
             </p>
             {% if post.slug %}
                 <a href="{{ post.get_absolute_url }}" class="text-blue-500 hover:underline">
