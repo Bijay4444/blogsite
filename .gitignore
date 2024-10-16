@@ -141,3 +141,4 @@ GitHub.sublime-settings
 blogsite/github_settings.py
 blogsite/google_settings.py
 blogsite/facebook_settings.py
+blogsite/mysite_data.json

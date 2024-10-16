@@ -1,0 +1,44 @@
+{% extends 'base_nav.html' %}
+{% load blog_tags %}
+
+{% block title %} Search {% endblock %}
+
+{% block main_content %}
+{% if query %}
+    <h1 class="text-2xl font-bold text-gray-900 mb-4">Posts containing "{{ query }}"</h1>
+    <h3 class="text-lg text-gray-700 mb-2">
+        {% with results.count as total_results %}
+            Found {{ total_results }} result{{ total_results|pluralize }}
+        {% endwith %}
+    </h3>
+
+    <div class="space-y-4">
+        {% for post in results %}
+            <div class="border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
+                <h4 class="text-xl font-semibold text-blue-600 hover:underline">
+                    <a href="{{ post.get_absolute_url }}">
+                        {{ post.title }}
+                    </a>
+                </h4>
+                <p class="text-gray-700 mt-2">
+                    {{ post.content|markdown|truncatewords_html:12 }}
+                </p>
+            </div>
+        {% empty %}
+            <p class="text-gray-500">There are no results for your query.</p>
+        {% endfor %}
+    </div>
+
+    <p class="mt-6">
+        <a href="{% url "blogs:post_search" %}" class="text-blue-500 hover:text-blue-700">Search again</a>
+    </p>
+{% else %}
+    <h1 class="text-2xl font-bold text-gray-900 mb-4">Search for posts</h1>
+
+    <form method="get" class="space-y-4">
+        {{ form.as_p }}
+        <input type="submit" value="Search" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    </form>
+{% endif %}
+
+{% endblock %}

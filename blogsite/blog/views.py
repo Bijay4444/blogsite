@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import FormView
 from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 from .models import Post, Comment, Interactions
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.postgres.search import SearchVector
 from django.views import View
 from django.db.models import Q
-from .forms import CommentForm, EmailPostForm
+from .forms import CommentForm, EmailPostForm, SearchForm
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.utils import timezone
@@ -141,3 +143,17 @@ class CommentDeleteView(OwnerDeleteView):
             post.publish.year, post.publish.month, post.publish.day, post.slug
         ])
 
+
+def post_search(request):
+    form = SearchForm()
+    query = None
+    results = []
+    
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Post.objects.annotate(
+                search=SearchVector('title', 'content'),
+            ).filter(search=query)
+    return render(request, 'blog/post_search.html', {'form': form, 'query': query, 'results': results})
